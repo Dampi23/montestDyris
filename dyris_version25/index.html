@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- http://dyris.free.fr/ -->
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Dyris</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="page"><div class="message"><img src="chargt.svg"><br><br>PATIENCE...</div></div>
+<div id="masque"><div id="fenetre"></div></div>
+<script>
+$=function(id) { return document.getElementById(id); };
+String.prototype.hasard=function() {
+	var ch=this, txt=ch.split("||"), nb=Math.floor(txt.length*Math.random());
+	return txt[nb];
+};
+window.onload=function() { ecrire_page1(); };
+window.onkeydown=function(event) {
+	if(event.keyCode=="13") {
+		event.preventDefault(); // Annule l'effet par défaut associé à la touche Entrée
+		if (cont.num_page=="1") p1_commencer();
+		else {
+			if (cont.num_page=="2") p2_verifier();
+			else if (cont.num_page=="2bis") p2_suivant();
+		}
+	}
+};
+</script>
+<script src="modele.js"></script>
+<script src="vue.js"></script>
+<script src="controleur.js"></script>
+<script src="textes.js"></script>
+<script src="donnees.js"></script>
+<script src="minmath.js"></script>
+</body>
+
+</html>
+

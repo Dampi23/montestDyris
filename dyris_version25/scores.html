@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- Page affichée pour le mode évaluation 1 et le mode sauvegarde 1 -->
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Scores</title>
+<link rel="stylesheet" href="style.css">
+<script src="textes.js"></script>
+<script>
+// Valeur de la note
+function valeur(n) {
+	if (n.charAt(0)=="-") return -1;
+	else return eval(n);
+}
+note=[];
+// Fonctions de gestion des cookies
+function getcookie(nom) {
+	var position, fin, recherche=nom+'=';
+	if (document.cookie.length>0) {
+		position=document.cookie.indexOf(recherche);
+		if (position!=-1) {
+			position=position+recherche.length; // On passe après nom=
+			fin=document.cookie.indexOf(';',position); // On cherche la fin (";")
+			if (fin==-1) fin=document.cookie.length; // Sans ";", le cookie continue
+			return unescape(document.cookie.substring(position,fin));
+		}
+		else return '';
+	}
+	else return '';
+}
+function putcookie(nom,texte,jours) {
+	var datecourante=new Date(), expires=new Date();
+	expires.setTime(datecourante.getTime()+1000*60*60*24*jours);
+	document.cookie=nom+'='+escape(texte)+'; expires='+expires.toGMTString();
+}
+function effacer() {
+	putcookie("dyris_2","","-1");
+	window.location.reload();
+}
+// Lecture du Cookie "dyris_2" et création du tableau à deux entrées note[i][j]
+fichier=getcookie("dyris_2");
+ligne=fichier.split("\n");
+for (i=0; i<ligne.length; i++) { if (ligne[i]!="") note[i]=ligne[i].split("§"); }
+// Ordonnancement du tableau à deux entrées note[i][j] selon les notes obtenues
+for (i=0; i<note.length; i++) {
+	var sauv=[];
+	var max=i;
+	for (var j=i; j<note.length; j++) { if (valeur(note[j][4])>valeur(note[max][4])) max=j; }
+	if (max!=i) {
+		for (var k=0; k<5; k++) {
+			sauv[k]=note[i][k];
+			note[i][k]=note[max][k];
+			note[max][k]=sauv[k];
+		}
+	}
+}
+onload=function() {
+	var i,j, ch='<table><tr><th>';
+	ch+=txt.score[0]+'</th><th>'+txt.score[1]+'</th><th>'+txt.score[2];
+	ch+='</th><th>'+txt.score[3]+'</th><th>'+txt.score[4]+'</th></tr>';
+	for (i=0; i<note.length; i++) {
+		ch+='<tr>';
+		for (j=0; j<5; j++) { ch+='<td>'+note[i][j]+'</td>'; }
+		ch+='</tr>';
+	}
+	ch+='</table><nav id="menu"><button type="button" onclick="effacer();">'+txt.score[5];
+	ch+='</button></nav>';
+	document.body.innerHTML=ch;
+};
+</script>
+
+</head>
+
+<body></body>
+
+</html>
+

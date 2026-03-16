@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documentation Dyris</title>
+<style>
+body {
+	background-color: #eee;
+	padding: 15px;
+	color: #111;
+	font-family: sans-serif;
+}
+h1 {
+	text-align: center;
+	background-color: #fe5;
+	color: #117;
+	padding: 10px;
+	border: 5px solid #117;
+	border-radius: 20px;
+}
+h2 {
+	color: #eee;
+	background-color: #117;
+	padding: 5px;
+	padding-left: 20px;
+	margin-top: 40px;
+	border-radius: 10px;
+}
+h3 { color: #117; }
+h4 { padding-left: 10px; }
+p { padding-left: 20px; }
+a {
+	text-decoration: none;
+	color: #111;
+}
+code { color: #181; }
+table {
+	margin: auto;
+	border-collapse: collapse;
+}
+td {
+	text-align: center;
+	padding: 6px;
+	border: solid 1px #000;
+}
+q { quotes: "«\0000A0" "\0000A0»"; }
+</style>
+</head>
+<body>
+
+
+
+
+<h1>DYRIS - VERSION 25</h1>
+
+
+
+
+<h2>Sommaire</h2>
+
+<ul>
+<a href="#a1">1. Introduction</a><br>
+<a href="#a2">2. Nouveautés par rapport à la version précédente</a><br>
+<a href="#a3">3. Créer un nouvel exercice</a><br>
+<ul>
+	<a href="#a3b1">3.1. Conseils</a><br>
+	<a href="#a3b2">3.2. Pour les utilisateurs de Windows</a>
+</ul>
+<a href="#a4">4. Les options</a><br>
+<ul>
+	<a href="#a4b1">4.1. Options générales</a><br>
+	<a href="#a4b2">4.2. Options pour l'accès</a><br>
+	<a href="#a4b3">4.3. Options pour la notation</a><br>
+	<a href="#a4b4">4.4. Options pour les appréciations</a>
+</ul>
+<a href="#a5">5. Le questionnaire</a>
+<ul>
+	<a href="#a5b1">5.1. Ajouter un thème</a><br>
+	<a href="#a5b2">5.2. Ajouter une question</a><br>
+	<a href="#a5b3">5.3. Réponses de type <q>cases à cocher</q></a><br>
+	<a href="#a5b4">5.4. Réponses de type <q>boutons radio</q></a><br>
+	<a href="#a5b5">5.5. Réponses de type <q>zones de texte à remplir</q></a><br>
+	<a href="#a5b6">5.6. Réponses de type <q>listes de sélection</q></a><br>
+	<a href="#a5b7">5.7. Du texte entre les réponses</a>
+</ul>
+<a href="#a6">6. Les outils de communication</a>
+<ul>
+	<a href="#a6b1">6.1. Fichier image, audio... associé à une question</a><br>
+	<a href="#a6b2">6.2. Commentaires associés à une question</a><br>
+	<a href="#a6b3">6.3. Chronomètre associé à une question</a><br>
+	<a href="#a6b4">6.4. Boutons affichant de l'information</a><br>
+	<a href="#a6b5">6.5. Barre de caractères spéciaux</a>
+</ul>
+<a href="#a7">7. Complément</a>
+<ul>
+	<a href="#a7b1">7.1. Proposer plusieurs énoncés</a><br>
+	<a href="#a7b2">7.2. Raccourcis</a><br>
+	<a href="#a7b3">7.3. Caractères propres à Dyris</a><br>
+	<a href="#a7b4">7.4. Pour les mathématiciens</a><br>
+	<a href="#a7b5">7.5. L'apostrophe</a>
+</ul>
+<a href="#a8">8. La présentation</a><br>
+<ul>
+	<a href="#a8b1">8.1. Le fichier <i>index.html</i></a><br>
+	<a href="#a8b2">8.2. Le fichier <i>style.css</i></a><br>
+	<a href="#a8b3">8.3. Le fichier <i>textes.js</i></a>
+</ul>
+<a href="#a9">9. La notation</a><br>
+<a href="#a10">10. Structure du logiciel</a><br>
+</ul>
+
+
+
+
+<h2 id="a1">1. Introduction</h2>
+
+<p>Dyris est un générateur d'exercices avec correction et évaluation automatiques.
+Basé sur le langage JavaScript, il s'installe, par exemple, sur une clé USB.
+Il peut évidemment et avantageusement être placé sur un serveur.</p>
+<p>Il contient de nombreuses options et se paramètre facilement. Chacun peut y apporter son design personnel.
+Les questions sont posées les unes après les autres,
+soit dans l'ordre choisi par le professeur, soit au hasard parmi les questions disponibles.
+Les exercices se définissent dans le fichier donnees.js, divisé en deux parties&nbsp;: Les options</i> et le questionnaire.</p>
+<p>La sauvegarde des scores sur le serveur est une option,
+créée pour que les étudiants d'une même classe puissent comparer leurs résultats.
+Pour une évaluation, il est conseillé de rendre le fichier donnees.js illisible, on dit communément offusquer le code.
+De nombreuses applications web permettent de le faire.
+Les informations sensibles deviennent alors inaccessibles à l'étudiant qui consulterait le code.</p>
+
+
+
+
+<h2 id="a2">2. Nouveautés par rapport à la version précédente</h2>
+
+<ul>
+<li>Modernisation du code pour suivre l'évolution du JavaScript
+(retrait du prototype pour trim(), de l'option JavaScript désactivé...).
+<li>Objet <q>txt</q> définit directement dans le fichier <q>textes.js</q>
+sans passer par plusieurs fonctions.
+<li>Abandon de la possibilité d'envoyer un mél
+(fonctionnement trop aléatoire selon la configuration du serveur).
+<li>Possibilité de créer des boutons affichant des informations dans des onglets.
+<li>Possibilité de créer des boutons affichant des informations (fenêtre ou onglet au choix)
+ après la correction d'une question.
+</ul>
+
+
+
+
+<h2 id="a3">3. Créer un nouvel exercice</h2>
+
+<p>Le plus simple est de modifier le fichier <i>donnees.js</i> avec un éditeur de texte.
+La structure de ce fichier ne nécessite pas de connaissance particulière en programmation.
+Le fichier <i>donnees.js</i> comporte deux parties : 
+<ul>
+<li>Les <i>options</i>, nombreuses mais facultatives.
+<li>Et le <i>questionnaire</i>.
+</ul>
+<p><u>Attention :</u></p>
+<p>A la moindre erreur dans le fichier <i>donnee.js</i>, votre exercice ne fonctionnera pas.
+En lançant l'exercice, la barre de défilement apparaîtra mais rien ne se chargera!
+Donc testez votre exercice, au fur et à mesure que vous le complétez.
+Et si l'exercice ne se charge pas, il est possible qu'une question ne respecte pas la syntaxe correcte.
+Vérifiez les parenthèses, les guillemets, les points virgules...</p>
+<p>A chaque modification du fichier <i>donnees.js</i>, vous devez l'enregistrer
+<i>AU FORMAT TEXTE SEULEMENT</i> avec l'encodage <i>UTF-8</i> ou <i>Unicode</i>.
+Les autres formats engendreront des erreurs empêchant votre exercice de fonctionner correctement.</p>
+
+
+<h3 id="a3b1">3.1. Conseils</h3>
+
+<ul>
+<li>Ne mélangez pas les majuscules et minuscules pour les extensions des noms d'images.
+Par exemple, si une image placée dans le dossier <i>/schemas</i> se nomme <i>Chene_liege.jpg</i> :
+<ul>
+<li>Ecrivez: <code>ajout("schemas/Chene_liege.jpg");</code>
+<li>Au lieu de: <code>ajout("schemas/Chene_liege.JPG");</code>
+</ul>
+<li>Limitez vos noms de fichier aux 26 lettres non accentuées,
+aux 10 chiffres et au caractère <i>UNDERSCORE</i> (le trait bas de la touche 8) pour rendre plus lisible le nom.
+Par exemple, écrivez <i>Chene_liege.jpg</i> au lieu de <i>Chêne liège.jpg</i>.
+</ul>
+
+
+<h3 id="a3b2">3.2. Pour les utilisateurs de Windows</h3>
+
+<p>Vous devriez adopter les logiciels libres, passer au système GNU/Linux, plus fiable et pratique.
+Mais bon. Si vous êtes tout de même sous Windows, vous disposez :</p>
+<ul>
+<li>De l'éditeur de texte Wordpad. Le bloc notes est à éviter à cause du codage des retours à la ligne.
+<li>Du navigateur Internet Explorer.
+</ul>
+<p>Si vous utilisez Wordpad :</p>
+<ul>
+<li>Le fichier <i>donnees.js</i> doit être sauvegardé en texte Unicode
+pour que les caractères accentués tapés dans Wordpad soient correctement présentés sur la page HTML.
+<li>L'extension <i>.js</i> doit être rétablie manuellement, l'extension par défaut du format texte Unicode étant .txt
+(sous Wordpad en tous cas).
+</ul>
+<p>Certaines versions d'Internet Explorer bloque les programmes en JavaScript placés sur disque dur ou sur CD.
+Ce problème ne se pose pas pour un programme placé sur un serveur.
+<p><u>Solutions :</u></p>
+<ul>
+<li>Installez et utilisez un vrai éditeur de texte, comme Notepad++.
+<li>Modifiez les paramètres de sécurité d'Internet Explorer:
+menu [Outil], commande [Options Internet], onglet [Avancé], rubrique [Sécurité], cochez la case <q>Autoriser le contenu actif...</q>.
+<li>Préférez un autre navigateur, FireFox par exemple.
+</ul>
+
+
+
+
+<h2 id="a4">4. Les options</h2>
+
+<p>Les options se définissent dans le fichier <i>donnees.js</i> par un ensemble de fonctions.
+Elles sont facultatives si vous vous contentez des options par défaut.</p>
+
+
+<h3 id="a4b1">4.1. Options générales</h3>
+
+<p><code>mode_presentation("1");</code></p>
+<p>Deux présentations sont possibles :
+<ul>
+<li>Mode <code>1</code> : Plusieurs thèmes peuvent être sélectionnés en cochant les cases correspondantes.
+<li>Mode <code>2</code> : Un seul thème peut être sélectionné en cliquant sur le bouton correspondant.
+</ul>
+<p>Le mode <code>1</code> est l'option par défaut.</p>
+<p><code>mode_evaluation("1");</code></p>
+<p>Deux évaluations sont possibles :
+<ul>
+<li>Mode <code>1</code> : C'est l'évaluation formative.
+  <ul>
+  <li>Après avoir répondu à une question, l'étudiant voit la correction et la note obtenue
+  à la question.
+  <li>La page d'évaluation comporte le bouton <i>ENREGISTRER LE SCORE</i>.
+  L'étudiant peut enregistrer son résultat s'il le souhaite.
+  <li>Lorsque l'enregistrement est effectué, l'ensemble des résultats déjà enregistrés apparaît.
+  </ul>
+<li>Mode <code>2</code> : C'est l'évaluation sommative.
+  <ul>
+  <li>Après avoir répondu à une question, l'étudiant ne voit ni la correction, ni la note obtenue
+  à la question.
+  <li>L'enregistrement du résultat final obtenu par l'étudiant est automatique.
+  Il est effectué en même temps que l'affichage de la page d'évaluation.
+  <li>Seule une confirmation de l'enregistrement est affiché. L'ensemble des résultats déjà
+  enregistrés n'apparaît pas.
+  </ul>
+</ul>
+<p>Le mode <code>1</code> est l'option par défaut.</p>
+<p><code>mode_sauvegarde("1");</code></p>
+<p>Deux sauvegardes sont possibles.</p>
+<ul>
+<li>Mode <code>1</code> : Pour enregistrer le score dans un cookie.
+<li>Mode <code>2</code> : Pour enregistrer le score dans un fichier, lorsque Dyris est placé sur un serveur
+pourvu du module PHP.
+</ul>
+<p>Avec le mode <code>1</code>, les enregistrements se font en local dans un cookie,
+sauf si le navigateur est configuré pour refuser les cookies.</p>
+<p>Avec le mode <code>2</code>, les enregistrements se font dans le fichier <i>scores.csv</i>
+placé sur le serveur.
+Attention à ce que ce fichier ait les droits d'accès en lecture et écriture.
+Chaque ligne de ce fichier correspond à un enregistrement.
+Au fil des sauvegardes, le fichier devient de plus en plus volumineux.
+Il convient donc, de temps à autre, de le raccourcir avec un éditeur de texte.</p>
+<p>Le mode <code>1</code> est l'option par défaut.</p>
+<p><code>titre_introduction("votre titre");</code></p>
+<p>Indiquez, entre les guillemets, le titre qui s'affiche dans la page d'accueil.
+Supprimez cette ligne si vous ne voulez pas de titre.
+N'utilisez pas de guillemets dans votre titre car Dyris l'interprétera comme la fin de votre titre.</p>
+<p><code>introduction("commentaire");</code></p>
+<p>Indiquez, entre les guillemets, le commentaire qui s'affiche sous le titre.
+Supprimez cette ligne si vous ne voulez pas de commentaire.</p>
+<p><code>nombre_questions("5","10","15");</code></p>
+<p>Indiquez, entre les guillemets, les nombres de questions qui seront proposés dans la page d'accueil.</p>
+<ul>
+<li>Si vous supprimez cette ligne, toutes les questions du fichier <i>donnees.js</i> seront posées, dans l'ordre où elles sont écrites, en fonction des thèmes sélectionnés.
+<li>Si vous n'indiquez qu'un seul nombre de questions, ce nombre n'apparaîtra pas dans la page d'accueil,
+les questions sont choisies au hasard parmi celles disponibles dans les thèmes sélectionnés.
+<li>Si vous indiquez plusieurs nombres de questions, ces nombres apparaîtront dans la page d'accueil,
+les questions sont choisies au hasard parmi celles disponibles dans les thèmes sélectionnés.
+</ul>
+<p><code>url_quitter("http://dyris.free.fr/");</code></p>
+<p>Définissez ici l'adresse de la page vers laquelle vous souhaitez être redirigé
+lorsque vous cliquez sur le bouton <i>QUITTER</i>.
+Si cette adresse n'est pas définie, le bouton <i>QUITTER</i> n'apparaît pas.</p>
+
+
+<h3 id="a4b2">4.2. Options pour l'accès</h3>
+
+<p><code>code("Pascal","W4AbQX");<br>
+code("Alice","ApG1Mh");</code></p>
+<p>La fonction <code>code()</code>, facultative, permet de définir un identifiant
+associé à un mot de passe.
+Elle est appelée pour chaque utilisateur à définir. 
+L'accès à l'évaluation sera ainsi limité aux seuls utilisateurs autorisés.</p>
+<p>Il est possible de définir un identifiant sans mot de passe.
+Dans ce cas, l'identifiant sera vérifié mais pas le mot de passe.
+Les deux écritures ci-dessous sont équivalentes.</p>
+<p><code>code("Pascal","");<br>
+code("Pascal");</code></p>
+<p>Il est possible de définir un mot de passe sans identifiant.
+Dans ce cas, le mot de passe sera vérifié mais pas l'identifiant.</p>
+<p><code>code("","W4AbQX");<br>
+code("","ApG1Mh");</code></p>
+
+
+<h3 id="a4b3">4.3. Options pour la notation</h3>
+
+<p><code>coef_rep_juste("3");</code></p>
+<p>Indiquez, entre les guillemets, le coefficient correspondant à une réponse juste.
+Vous devez écrire une valeur positive!
+Si vous supprimez cette ligne, le coefficient par défaut est <code>1</code>.</p>
+<p><code>coef_rep_fausse("-1");</code></p>
+<p>Indiquez, entre les guillemets, le coefficient correspondant à une réponse fausse.
+Vous devez écrire une valeur négative ou nulle!
+Si vous supprimez cette ligne, le coefficient par défaut est <code>-0.5</code>.</p>
+<p><code>coef_rep_nulle("-0.5");</code></p>
+<p>Indiquez, entre les guillemets, le coefficient correspondant à une réponse non fournie,
+c'est à dire lorsque l'étudiant clique sur le bouton <i>JE NE SAIS PAS</i>.
+Vous pouvez écrire une valeur négative ou positive!
+Si vous supprimez cette ligne, le coefficient par défaut est <code>0</code>.</p>
+<p><code>note_sur("30");</code></p>
+<p>La note sera ramené sur la valeur indiquée entre les guillemets. On lui attribue souvent la valeur <code>20</code>.
+Si vous supprimez cette ligne, la note est ramenée sur le nombre de questions que l'utilisateur a sélectionné.</p>
+
+
+<h3 id="a4b4">4.4. Options pour les appréciations</h3>
+
+<p>Vous pouvez choisir l'appréciation à mettre selon la note obtenue par l'étudiant,
+la note étant ici exprimée sur 20. Par exemple, si vous voulez l'appréciation <i>Résultat moyen</i> pour une note comprise entre 10 et 12,
+vous devez écrire, dans le fichier <i>donnees.js</i>:</p>
+<p><code>appreciation("10","12","Résultat moyen");</code></p>
+<p><u>Remarque:</u> Si l'étudiant obtient une note correspondant à plusieurs appréciations, la dernière appréciation est prioritaire.
+Par exemple, si l'étudiant a obtenu 12 et que le fichier <i>donnees.js</i> comporte:</p>
+<p><code>appreciation("10","12","Résultat moyen");</code><br>
+<code>appreciation("12","14","Bon travail");</code></p>
+<p>Alors l'étudiant obtiendra comme appréciation: <i>Bon travail</i>.</p>
+<p>Vous pouvez également mettre une appréciation lorsque l'étudiant quitte l'exercice avant d'avoir terminé:</p>
+<p><code>non_termine("Vous avez quitté l'exercice sans avoir répondu à toutes les questions !");</code></p>
+
+
+
+
+<h2 id="a5">5. Le questionnaire</h2>
+
+<p>Après avoir choisi vos options dans le fichier <i>donnees.js</i>, il vous faut définir le questionnaire.
+Il est généralement constitué d'un ensemble de questions regroupées par thèmes.</p>
+
+
+<h3 id="a5b1">5.1. Ajouter un thème</h3>
+
+<p><code>theme("nouveau thème");</code></p>
+<p>Pour chaque thème dont vous indiquez le titre ici, vous allez écrire des blocs de question / réponses.
+Naturellement, si l'ensemble de votre questionnaire ne comporte qu'un seul thème, cette ligne est facultative.</p>
+
+
+<h3 id="a5b2">5.2. Ajouter une question</h3>
+
+<p><code>question("Où vit le personnage principal de l'histoire?");</code></p>
+<p>Pour changer l'énoncé de la question, modifiez le texte entre guillemets.</p>
+<p><code>question("Où vit le personnage principal de l'histoire?//2");</code></p>
+<p>Par défaut, le barème pour une question est de 1 point.
+Un barème différent de 1 point se définit à la fin de l'énoncé.
+Par exemple, pour une question notée sur 2 points, rajoutez <code>//2</code> à la fin de l'énoncé.</p>
+<p><code>question("Où vit le personnage principal de l'histoire?//a");</code></p>
+<p>Suite à une question, plusieurs réponses seront proposées.
+Ces réponses apparaîtront dans l'ordre où vous les écrivez, sauf si vous rajoutez <code>//a</code>
+(<i>a</i> comme <i>aléatoire</i>) à la fin de l'énoncé. Dans ce cas, les réponses seront affichées dans un ordre aléatoire.</p>
+<p><code>question("Où vit le personnage principal de l'histoire?//2a");</code></p>
+<p>Bien sûr, une question peut être notée sur 2 points et comporter des réponses dans un ordre aléatoire.
+Attention toutefois : Le mode aléatoire ne fonctionne pas pour les réponses de type
+<q>cases à remplir</q>.</p>
+
+
+<h3 id="a5b3">5.3. Réponses de type <q>cases à cocher</q></h3>
+
+<p><code>question("Où vit le personnage principal de l'histoire?");<br>
+reponse("[x] dans une petite maison, près de la forêt");<br>
+reponse("[ ] dans une petite maison, au bord de la rivière");<br>
+reponse("[ ] dans un magnifique château");</code></p>
+<p>Les cases à cocher sont symbolisées par les caractères:</p>
+<ul>
+<li><code>[x]</code> ou <code>[o]</code> ou <code>[*]</code> si la case doit être cochée.
+<li><code>[ ]</code> dans le cas contraire.
+</ul>
+<p>Il est indispensable de proposer au moins deux réponses par question.
+Une réponse au moins doit être juste.</p>
+
+
+<h3 id="a5b4">5.4. Réponses de type <q>boutons radio</q></h3>
+
+<p><code>question("Où vit le personnage principal de l'histoire?");<br>
+reponse("(o) dans une petite maison, près de la forêt");<br>
+reponse("( ) dans une petite maison, au bord de la rivière");<br>
+reponse("( ) dans un magnifique château");</code></p>
+<p>Les boutons radio sont symbolisés par les caractères:</p>
+<ul>
+<li><code>(o)</code> ou <code>(x)</code> ou <code>(*)</code> si le bouton doit être coché.
+<li><code>( )</code> dans le cas contraire.
+</ul>
+<p>Il est indispensable de proposer au moins deux réponses par question.
+Une seule réponse doit être juste.</p>
+
+
+<h3 id="a5b5">5.5. Réponses de type <q>zones de texte à remplir</q></h3>
+
+<p><code>question("Où vit le personnage principal de l'histoire?");<br>
+reponse("dans une petite [maison||demeure], près de la [forêt]");</code></p>
+<p>Le texte à compléter se met entre les caractères <code>[</code> et <code>]</code>.
+Dans le cas où plusieurs réponses justes sont possibles, elles sont séparées par les caractères <code>||</code>.
+
+
+<h3 id="a5b6">5.6. Réponses de type <q>listes de sélection</q></h3>
+
+<p><code>question("Une figure géométrique est représentée ci-contre.");<br>
+reponse("Cette figure est un [cercle||*triangle*||carré||losange[v]");</code></p>
+<ul>
+<li>Les éléments de la liste sont placés entre les caractères <code>[</code> et <code>[v]</code>.
+<li>Ils sont séparés par les caractères <code>||</code>.
+<li>La bonne réponse est encadrée par les caractères <code>*</code>.
+</ul>
+<p>Les caractères <code>[v]</code> symbolisent la petite flèche sur laquelle cliquer pour dérouler la liste.</p>
+
+
+<h3 id="a5b7">5.7. Du texte entre les réponses</h3>
+
+<p>Du texte peut être inséré entre plusieurs réponses.
+Dans l'exemple suivant, la deuxième réponse comporte simplement du texte&nbsp;:</p>
+<p><code>rep("La figure A est un [cercle||*triangle*||carré||losange[v]");<br>
+rep("Pour la deuxième figure, plusieurs réponses sont possibles...");<br>
+rep("La figure B est un [cercle||rond||disque]");
+</code></p>
+
+
+
+
+<h2 id="a6">6. Les outils de communication</h2>
+
+<p>Ces outils, facultatifs quoique bien pratiques, peuvent être :</p>
+<ul>
+<li>Un fichier image, audio, vidéo, PDF... associé à une question.
+<li>Un commentaire :
+  <ul>
+  <li>Au moment où la question est posée.
+  <li>Lorsque l'étudiant a bien répondu.
+  <li>Lorsque l'étudiant s'est trompé.
+  <li>Si l'étudiant a préféré ne pas répondre à la question.
+  </ul>
+<li>Un chronomètre limitant le temps pour répondre à une question.
+<li>Un bouton pour afficher une information complémentaire.
+<li>Une barre avec des boutons permettant d'inclure des caractères spéciaux, dans les zones de texte à compléter.
+</ul>
+<p>Un outil de communication peut être associé :
+<ul>
+<li>A une seule question.
+<li>A toutes les questions d'un même thème.
+<li>A toutes les questions de tous les thèmes.
+</ul>
+<p>L'outil est défini par une fonction, laquelle peut être située à divers endroits du fichier <i>donnee.js</i>.</p>
+<ul>
+<li>Placée après une question, l'outil est défini pour la question.
+<li>Placée juste après un thème, l'outil est défini pour toutes les questions du thème.
+<li>Placée au début du fichier <i>donnees.js</i>, l'outil est défini pour toutes les questions de tous les thèmes.
+</ul>
+<p>Il existe un ordre de priorité :
+Un outil défini pour une question est prioritaire sur celui défini pour le thème,
+lui-même prioritaire sur celui défini pour l'ensemble des thèmes.
+Par exemple, si une image est associé à un thème et une autre image associée à une question de ce thème,
+alors seule cette dernière image sera effectivement affichée, lorsque la question est posée.</p>
+
+
+<h3 id="a6b1">6.1. Fichier image, audio... associé à une question</h3>
+
+<p><code>question("Où vit le personnage principal de l'histoire?");<br>
+reponse("[x] dans une petite maison, près de la forêt");<br>
+reponse("[ ] dans une petite maison, au bord de la rivière");<br>
+reponse("[ ] dans un magnifique château");<br>
+ajout("schemas/image1.gif");</code></p>
+<p>Pour changer l'image, modifiez le texte entre guillemets (dernière ligne). L'image :</p>
+<ul>
+<li>Est facultative, supprimez la ligne si vous ne voulez aucune image.
+<li>Doit être au format <i>.png</i>, <i>.gif</i>, <i>.jpeg</i> (ou <i>.jpg</i>) ou <i>.webp</i>.
+<li>Doit être placée dans le dossier indiqué.
+</ul>
+<p>Dans cet exemple, le dossier se nomme <i>/schemas</i>.
+Vous pouvez définir divers dossiers pour vos images.</p>
+<p>Il est possible d'indiquer les dimensions des images.
+Par exemple, si vous souhaitez que l'image <i>image1.gif</i> soit affichée avec une largeur
+de&nbsp;155 pixels, la hauteur étant calculée automatiquement pour conserver les proportions, écrivez&nbsp;:</p>  
+<p><code>ajout("schemas/image1.gif","155");</code></p>
+<p>Si vous voulez également définir une hauteur, par exemple de 98 pixels, écrivez&nbsp;:</p>
+<p><code>ajout("schemas/image1.gif","155","98");</code></p>
+<p>Pour un fichier audio :</p>
+<p><code>quest("A l'aide du lecteur audio ci-dessous, écoutez et comptez les lettres du mot épelé");<br>
+rep("Nombre de lettres : [4]");<br>
+ajout("sons/jupe.ogg");</code></p>
+<p>Pour changer le fichier audio, modifiez le texte entre guillemets (dernière ligne).
+Les formats <i>.mp3</i>, <i>.avi</i>, <i>.mkv</i> et <i>.ogg</i> sont pris en charge.</p>
+<p>Pour un fichier vidéo, les formats <i>.mp4</i>, <i>.wav</i>, et <i>.webm</i>
+sont pris en charge.</p>
+
+
+<h3 id="a6b2">6.2. Commentaires associés à une question</h3>
+
+<p>Vous pouvez définir toutes sortes de commentaires selon les réponses apportées par l'étudiant :</p>
+<p><code>question("Combien y a-t-il de poissons?");<br>
+reponse("[ ] 4 poissons");<br>
+reponse("[ ] 5 poissons");<br>
+reponse("[x] 6 poissons");<br>
+reponse("[ ] 7 poissons");<br>
+ajout("schemas/poissons.gif");<br>
+debut("Pour répondre à cette question, il te suffit juste de savoir compter.");<br>
+juste("C'est exact, tu as bien compté!");<br>
+faux("Attention quand tu comptes: Il faut être plus attentif!");<br>
+abandon("Dommage, cette question était facile...");</code></p>
+<p><code>debut(" ... ");</code> : Remplacez les trois points de suspension par le commentaire à afficher
+au moment où la question est posée.</p>
+<p><code>juste(" ... ");</code> : Remplacez les trois points de suspension par le commentaire à afficher
+si l'étudiant apporte une bonne réponse.</p>
+<p><code>faux(" ... ");</code> : Remplacez les trois points de suspension par le commentaire à afficher
+si l'étudiant donne une mauvaise réponse.</p>
+<p><code>abandon(" ... ");</code> : Remplacez les trois points de suspension par le commentaire à afficher
+si l'étudiant élude la question en cliquant sur le bouton <i>JE NE SAIS PAS</i>.</p>
+
+
+<h3 id="a6b3">6.3. Chronomètre associé à une question</h3>
+
+<p><code>chronometre("20","Le temps imparti est écoulé!");</code></p>
+<p>Pour afficher un chronomètre limitant le temps de réponse à une question, indiquez&nbsp;:</p>
+<ul>
+<li>Le temps imparti en secondes.
+<li>Un commentaire éventuel, qui s'affichera si l'étudiant dépasse le temps imparti.
+</ul>
+<p>La fonction chronometre(), utilisée sans paramètre, limite le temps de réponse à la valeur par défaut.</p>
+
+
+<h3 id="a6b4">6.4. Boutons affichant de l'information</h3>
+
+<p>Des boutons sur lesquels cliquer peuvent être créés pour afficher des informations
+complémentaires&nbsp;:</p>
+<ul>
+<li>Dans des fenêtres.
+<li>Dans des onglets.
+</ul>
+<p>A trois moments :</p>
+<ul>
+<li>A la première page de sélection des thèmes et des nombres de questions.
+<li>Au moment où une question est posée.
+<li>Une fois la question corrigée.
+</ul>
+<p>Dyris propose ainsi six fonctions :</p>
+<ul>
+<li>fenetre_info()
+<li>fenetre_aide()
+<li>fenetre_corrige()
+<li>onglet_info()
+<li>onglet_aide()
+<li>onglet_corrige()
+</ul>
+<p>Ces fenêtres ou onglets ouvrent des pages au format HTML. Exemple&nbsp;:</p>
+<p><code>question("Quel mois précède le mois de juillet?");<br>
+reponse("Le mois de [juin]");<br>
+fenetre_aide("RAPPEL","pages/aide2.html","400","300");</code></p>
+<p>Une fonction pour une fenêtre prend un à quatre paramètres&nbsp;:</p>
+<ul>
+<li>Un paramètre : L'adresse de la page HTML, le texte sur le bouton étant le texte par défaut
+défini dans le fichier <q>textes.js</q>. 
+<li>Deux paramètres :
+  <ul>
+  <li>Le texte inscrit sur le bouton.
+  <li>L'adresse de la page HTML.
+  </ul>
+<li>Trois paramètres :
+  <ul>
+  <li>L'adresse de la page HTML, le texte sur le bouton étant le texte par défaut
+  défini dans le fichier <q>textes.js</q>.
+  <li>Les dimensions de la fenêtre en pixels, largeur et hauteur.
+  </ul>
+<li>Quatre paramètres :
+  <ul>
+  <li>Le texte inscrit sur le bouton.
+  <li>L'adresse de la page HTML.
+  <li>Les dimensions de la fenêtre en pixels, largeur et hauteur.
+  </ul>
+</ul>
+<p>Une fonction pour un onglet prend un ou deux paramètres&nbsp;:</p>
+<ul>
+<li>Un paramètre : L'adresse de la page HTML, le texte sur le bouton étant le texte par défaut
+défini dans le fichier <q>textes.js</q>. 
+<li>Deux paramètres :
+  <ul>
+  <li>Le texte inscrit sur le bouton.
+  <li>L'adresse de la page HTML.
+  </ul>
+</ul>
+
+
+<h3 id="a6b5">6.5. Barre de caractères spéciaux</h3>
+
+<p><code>caracteres_speciaux("œ","€","Ø");</code></p>
+<p>Indiquez la liste des caractères particuliers, difficiles à obtenir au clavier, utiles pour l'exercice.
+L'étudiant pourra insérer ces caractères dans les zones de texte à remplir, simplement en cliquant sur le bouton correspondant.</p>
+
+
+
+
+<h2 id="a7">7. Complément</h2>
+
+
+<h3 id="a7b1">7.1. Proposer plusieurs énoncés</h3>
+
+<p>D'une manière générale, vous pouvez définir plusieurs énoncés séparés par les caractères <code>||</code>.
+L'énoncé effectivement affiché sera pris au hasard parmi les énoncés disponibles.
+Ceci est valable pour les commentaires, les messages dans les boîtes de dialogue, les appréciations...</p>
+<p>Exemple :</p>
+<p><code>question("Quelle est la base du verbe abuser?||Saurais-tu m'écrire la base du verbe abuser?||Connais-tu la base du verbe abuser?");</code></p>
+<p>Autre exemple :</p>
+<p><code>juste("Excellent !||Bravo !||Bonne réponse !||C'est très bien!");<br>
+faux("Non...||Faux...||Erreur...||Inexact...||Dommage...");</code></p>
+
+
+<h3 id="a7b2">7.2. Raccourcis</h3>
+
+<p>Afin de rendre le fichier <i>donnees.js</i> plus court (donc plus rapide à charger ou à écrire),
+des raccourcis ont été créés. Ainsi, vous pouvez écrire :</p>
+<ul>
+<li><code>quest(...</code> à la place de <code>question(...</code>
+<li><code>rep(...</code> à la place de <code>reponse(...</code>
+<li><code>aj(...</code> à la place de <code>ajout(...</code>
+<li><code>aide(...</code> à la place de <code>fenetre_aide(...</code>
+<li><code>bouton_sup(...</code> à la place de <code>fenetre_info(...</code>
+</ul>
+
+
+<h3 id="a7b3">7.3. Caractères propres à Dyris</h3>
+
+<p>Les réponses comportent des caractères propres à Dyris.
+En conséquence, les caractères ci-dessous, que vous voudriez éventuellement obtenir,
+ne peuvent être écrits directement. Vous devez utiliser la désignation chiffrée correspondante.
+Les caractères fréquemment utilisés ont aussi une abréviation, plus facile à retenir,
+pouvant remplacer le code chiffré.<p>
+<table border="1" cellpadding="4">
+<tr><th>Caractère</th><th>Code chiffré</th><th>Abréviation</th></tr>
+<tr><td>&quot;</td><td>&amp;#34;</td><td>&amp;quot;</td></tr>
+<tr><td>&lt;</td><td>&amp;#60;</td><td>&amp;lt;</td></tr>
+<tr><td>&gt;</td><td>&amp;#62;</td><td>&amp;gt;</td></tr>
+<tr><td>&#91;</td><td>&amp;#91;</td><td>Pas d'abréviation</td></tr>
+<tr><td>&#93;</td><td>&amp;#93;</td><td>Pas d'abréviation</td></tr>
+</table>
+<p>Ceci est très important. En effet, vous ne pouvez pas utiliser directement le signe <code>&lt;</code>
+dans vos questions ou réponses car Dyris le comprendra comme le début d'une balise HTML.
+Vous devez donc utiliser l'abréviation <code>&amp;lt;</code></p>
+
+
+<h3 id="a7b4">7.4. Pour les mathématiciens</h3>
+
+<p>Pour écrire les formules mathématiques, vous disposez de toutes les balises de la bibliothèque
+<a href="http://progmath.free.fr/minmathjs/index.html">MinMathJS</a>,
+disponible à l'adresse&nbsp;:<br>
+http://progmath.free.fr/minmathjs/index.html.</p>
+<p>Par exemple, pour écrire une fraction, constituée d'un numérateur et d'un dénominateur :</p>
+<ul>
+<li>La fraction se place entre les balises <code>&lt;frac&gt;</code> et <code>&lt;/frac&gt;</code>
+<li>Le numérateur entre les balises <code>&lt;num&gt;</code> et <code>&lt;/num&gt;</code>
+<li>Le dénominateur entre les balises <code>&lt;den&gt;</code> et <code>&lt;/den&gt;</code>
+</ul>
+<ul><code>
+quest("Quelle est la valeur de &lt;frac&gt;&lt;num&gt;12&lt;/num&gt;&lt;den&gt;4&lt;/den&gt;&lt;/frac&gt; ?");<br>
+rep("( ) 2");<br>
+rep("(o) 3");
+</code></ul>
+<p><u>Caractères Unicodes.</u></p>
+<p>Dans le dossier <i>outils</i> se trouve le fichier <i>Unicode.html</i>.
+En ouvrant ce fichier avec un navigateur, vous obtenez une liste de caractères Unicodes.
+Parmi ces caractères, il y a des caractères grecs, des symboles mathématiques...
+Vous pouvez insérer les caractères de votre choix dans votre questionnaire, par un simple copier-coller.</p>
+
+
+<h3 id="a7b5">7.5. L'apostrophe</h3>
+
+<p>Attention, vous pouvez avoir un problème à cause des apostrophes.
+En effet, plusieurs caractères permettent d'écrire l'apostrophe, lequel peut être incurvé ou droit.</p>
+<p>En conséquence, si vous proposez la réponse :</p>
+<p><code>rep("[C’est] à l'infirmerie qu'il faudra le soigner.");</code></p>
+<p>Il se peut que l'étudiant réponde correctement mais que la réponse soit comptée fausse.
+La solution consiste à définir plusieurs apostrophes.</p>
+<p><code>rep("[C'est||C’est] à l'infirmerie qu'il faudra le soigner.");</code></p>
+<p>Ici, deux caractères différents sont utilisés pour écrire l'apostrophe.
+La réponse sera comptée juste si l'étudiant répond <i>C'est</i> ou <i>C’est</i>.</p>
+
+
+
+
+<h2 id="a8">8. La présentation</h2>
+
+
+<h3 id="a8b1">8.1. Le fichier <i>index.html</i></h3>
+
+<p>Ce fichier affiche un petit texte et une image pendant que l'exercice se charge.
+Vous pouvez le modifier pour lui donner le contenu que vous souhaitez.</p>
+
+
+<h3 id="a8b2">8.2. Le fichier <i>style.css</i></h3>
+
+<p>En modifiant le fichier <i>style.css</i>, vous obtiendrez la présentation de votre choix.
+A condition de connaître la programmation des feuilles de style...</p>
+<p>Si ce n'est pas le cas, vous pouvez tout de même modifier facilement les couleurs.
+Elle sont définies par le caractère <code>#</code> suivi de six chiffres, correspondant au code hexadécimal de la couleur.
+Vous pouvez retrouver le code hexadécimal d'une couleur avec un logiciel de dessin comme <i>The Gimp</i>, par exemple.</p>
+<p>Pour vous aider, d'autres feuilles de style sont proposées dans le dossier <i>outils</i>.
+Pour utiliser le fichier <i>style_2.css</i>, par exemple, il suffit de  renommer le fichier <i>style.css</i>
+(ou de l'effacer si vous n'en voulez plus) en <i>style_3.css</i>,
+puis de renommer <i>style_2.css</i> en <i>style.css</i>.</p>
+
+
+<h3 id="a8b3">8.3. Le fichier <i>textes.js</i></h3>
+
+<p>Il définit les textes utilisés par Dyris.
+Les titres des pages, les boutons, les messages qui s'affichent dans les fenêtres...
+Vous pouvez remplacer ces textes par ceux de votre choix.</p>
+<p>Dyris peut donc être programmé dans n'importe quelle langue.
+Une traduction en anglais du fichier <i>textes.js</i> est proposée dans le dossier <i>outils</i>.</p>
+
+
+
+
+<h2 id="a9">9. La notation</h2>
+
+<p>L'objet de ce paragraphe n'est pas de déterminer s'il est bon ou pas
+d'attribuer une note à un exercice. Nous vous indiquons simplement comment
+Dyris calcule la note attribuée à l'étudiant.
+Cependant, nous sommes parfaitement conscients que ce mode de calcul
+peut être amélioré (affichage du pourcentage de bonnes réponses, etc.)
+et nous sommes à l'écoute de vos suggestions et remarques.</p>
+<p>Tout d'abord, comme cela a déjà été expliqué, celui qui crée un exercice peut attribuer le barème
+de son choix, à n'importe quelle question. Par défaut, le barème pour une
+question est de 1 point. Un barème différent de 1 point se définit
+à la fin de l'énoncé. Par exemple, pour une question notée sur 2 points,
+il faut rajouter <code>//2</code> à la fin de l'énoncé:</p>
+<p><code>question("Où vit le personnage principal de l'histoire?//2");</code></p>
+<p>Ensuite, le calcul de la note s'effectue en fonction des coefficients définis dans le fichier <i>donnees.js</i>.
+Normalement, le coefficient pour une réponse juste est 1.
+Si ce n'est pas le cas, les coefficients sont adaptés en respectant les proportions,
+de sorte que la note maximale que peut obtenir l'étudiant soit égale au barème.</p>
+<p>La note est donc égale au coefficient (éventuellement modifié) multiplié par le barème.</p>
+<ul>
+<li>L'étudiant répond juste: note = (coef_réponse_juste/coef_réponse_juste)*barème = barème
+<li>L'étudiant se trompe: note = (coef_réponse_fausse/coef_réponse_juste)*barème
+<li>L'étudiant ne sais pas: note = (coef_réponse_nulle/coef_réponse_juste)*barème
+</ul>
+<p>Pour les questions ouvertes, le barème est réparti sur les cases à remplir.
+Par exemple, dans le cas d'une question avec 4 cases à remplir, le barème pour chaque case est égal à <i>barème/4</i>.</p>
+<p>La note finale (lorsque l'étudiant a répondu à toutes les questions)
+est ramené sur la valeur indiquée dans le fichier <i>donnees.js</i>.
+Et si l'étudiant abandonne l'exercice en cours de route, aucune note n'est donnée.</p>
+
+
+
+
+<h2 id="a10">10. Structure du logiciel</h2>
+
+<p>Dyris est écrit presque intégralement en <i>HTML</i>, <i>CSS</i> et <i>JavaScript</i>.
+Ces langages sont interprétés par votre navigateur (<i>FireFox</i>, <i>Internet Explorer</i>...).
+Pour l'option de sauvegarde sur serveur, une partie du code est également écrite en <i>PHP</i>.
+<p>Le logiciel comporte plusieurs fichiers :</p>
+
+<ul>
+<li><i>modele.js</i> : Utilise les fichiers <i>donnees.js</i> et <i>textes.js</i> en créant trois objets indépendants.
+<ul>
+<li><i>txt</i> : Tous les textes utilisés par Dyris.
+<li><i>opt</i> : Toutes les options. 
+<li><i>mod</i> : Tous les éléments du questionnaire.
+</ul>
+<li><i>vue.js</i> : Affiche les pages sur l'écran de l'ordinateur.
+<li><i>controleur.js</i> : Modifie l'affichage en fonction des actions de l'utilisateur en s'appuyant sur l'objet <i>cont</i>.
+</ul>
+<p>Le questionnaire, défini dans le fichier <i>donnees.js</i>, est préchargé à l'avance.
+Les images associées aux questions ne sont chargées qu'au moment où les questions sont posées.</p>
+
+
+</body>
+</html>
+

@@ -1,0 +1,215 @@
+DYRIS - HISTORIQUE DES VERSIONS
+
+
+Version 1 - Novembre 2002
+
+Première version proposée sur le site "http://dyris.free.fr".
+
+Version 2 - Décembre 2002
+
+• Paramétrage du nombre de questions à poser.
+• Regroupement du fichier "lisez_moi" et de la page "aide" en une page mode d'emploi.
+
+Version 3 - Janvier 2003 (par Laurent Simeon)
+
+• Création de la page "evaluation.html" qui lance le QCM en plein écran.
+• Ajout dans la page "page.html" d'un méta tag qui enlève la barre d'outils d'IE6.
+• Ajout d'une fonction dans le fichier "fonction.js" qui désactive le clic droit sur les pages chargées.
+• Modification du fichier "fonction.js" pour charger des images en 500x500.
+• Modification de toutes les pages pour qu'elles soient compatibles avec la feuille de style "qcm.css".
+
+Version 4 - Février 2003
+
+• Possibilité de sélectionner plusieurs thèmes.
+• Suppression du dessin "vide.gif".
+
+Version 5 - Juin 2003
+
+• Application lancée en plein écran.
+• Gestion des cas particuliers pour les options.
+• Choix pour les couleurs augmenté.
+• Possibilité de modifier la langue.
+• Amélioration de l'apparence du site "http://dyris.free.fr".
+
+Version 6 - Décembre 2004
+
+• Message d'attente pendant le chargement de l'application.
+• Présentation et couleurs entièrement dépendantes d'une feuille de style.
+• Modification de la structure du fichier "langues.js".
+• Compatibilité avec les divers navigateurs améliorée.
+• Ajout de raccourcis pour le fichier "donnees.js".
+• Commentaires dans le programme supprimés et placés dans le fichier "Lisez-moi.txt".
+• Dimensions quelconques pour les images associées aux questions.
+
+Version 7 - Septembre 2005
+
+• Paramétrage de la notation.
+• Redirection vers une page au choix en cliquant sur le bouton QUITTER.
+• Possibilité d'ajouter un bouton IMPRIMER sur la dernière page.
+• Abandon des tableaux pour la mise en page (la version 6 est la dernière à être compatible avec les anciens navigateurs).
+• Boutons remplacés par des liens.
+
+Version 8 - Janvier 2006
+
+• Cette documentation est intégrée à l'archive à télécharger, chaque version de Dyris étant différente.
+• En plus des questions avec des cases à cocher, il est possible de créer des questions avec des zones de texte à compléter.
+• La présentation des réponses de type cases à cocher, dans le fichier "donnees.js", est modifiée.
+
+Version 9 - Avril 2006
+
+• Deux affichages possibles pour le choix des thèmes dans la page d'accueil.
+• Ppossibilité de créer des questions avec des boutons radio (une seule réponse peut être cochée).
+• Une option permet de poser les questions dans l'ordre où elles sont écrites dans le fichier donnees.js.
+• Modification de la présentation des options.
+
+Version 10 - Juin 2006
+
+• Possibilité de choisir un barème pour chaque question.
+• Affichage du barème et de la note obtenue pour chaque question.
+• Possibilité de définir les dimensions des images associées aux questions.
+• Paramétrage des appréciations dans le fichier "donnees.js".
+• Modification du code pour le bug Peekaboo d'IE6.
+
+Version 11 - Septembre 2006
+
+• Possibilité d'enregistrer les notes obtenues dans un cookie (code proposé par Gérard Surgand).
+• Ouverture de la liste de diffusion "http://fr.groups.yahoo.com/group/dyris/messages".
+• Liens remplacés par des balises <button> pour les boutons.
+• Modification de l'apparence du menu dans la page où sont posées les questions.
+• Dans les questions de type zones de texte à remplir, mise du focus dans la première case.
+
+Version 12 - Janvier 2007
+
+• Mode d'emploi placé dans une page à part, au format HTML, et paramétrage du bouton permettant d'y accéder.
+• Pour chaque question, possibilité de créer des boutons qui ouvrent des fenêtres contenant des pages au format HTML.
+• Modification de la structure du fichier "langues.js", renommé "textes.js".
+• Amélioration de la présentation de la page "scores.html".
+• Modification de la mise en page et de la feuille de style associée pour offrir plus de possibilités au niveau de la présentation.
+• Création du dossier outils avec des exemples de feuilles de style et des traductions du fichier textes.js.
+
+Version 13 - Décembre 2007
+
+• Passage en UTF-8.
+• Création des balises <vec> et </vec>, <alg> et </alg> pour écrire les vecteurs ou les mesures algébriques dans le questionnaire.
+• Ajout possible de nombreux commentaires, dans la page où son posées les questions.
+• Commentaires placés au-dessus du menu, dans la page où son posées les questions.
+• Utilisation de la touche "Entrée" du clavier pour valider les réponses de type "cases à remplir".
+• Possibilité d'afficher les réponses dans un ordre aléatoire.
+• Généralisation du système pour afficher un texte pris au hasard parmi plusieurs textes disponibles.
+• Possibilité de placer les images associées aux questions dans des dossiers au choix.
+• Rappel des thèmes choisis dans la page d'évaluation.
+• Amélioration du système de création des boutons qui ouvrent les pages HTML.
+• Abandon de la page "plein_ecran.html".
+
+Version 14 - Avril 2008
+
+• Mise en place d'une barre de caractères spéciaux pour insérer facilement ces caractères dans les zones de texte à compléter.
+• Possibilité de définir des outils d'aide à la communication :
+ - Les images.
+ - Les messages au début de chaque question.
+ - Les commentaires après la réponse apportée par l'étudiant.
+ - Les boutons ouvrant des pages d'aide, les barres de caractères spéciaux.
+
+Version 15 - Septembre 2008
+
+• Zone d'affichage occupant 100% (au lieu de 99%) de la fenêtre.
+• Restructuration du code selon l'architecture Modèle-Vue-Contrôleur.
+• Suppression des nombres de questions proposés par défaut dans la page d'accueil.
+• Mode aléatoire automatique dès qu'un ou plusieurs nombres de questions sont définis dans le fichier "donnees.js".
+• Possibilité de présenter les choix des thèmes et des nombres de question avec des listes de sélection.
+• Pour les fenêtres qui s'ouvrent en cliquant sur des boutons, possibilité d'en définir les dimensions.
+• Ajout d'une feuille de style pour l'impression des résultats.
+
+Version 16 - Février 2009
+
+• Possibilité de sauvegarder les scores dans un fichier lorsque Dyris est placé sur un serveur pourvu du module PHP.
+• Dans le fichier "donnees.js", utilisation des caractères x, o ou * pour signifier qu'une case ou un bouton radio doit être coché.
+• Suppression du titre de la page évaluation.
+
+Version 17 - Mai 2010
+
+• Création d'une option d'évaluation sommative dans laquelle l'étudiant ne voit pas les bonnes réponses ni les notes obtenues aux questions.
+• Fonctions "mode_theme()" et "mode_question()" regroupées en une seule fonction "mode_presentation()".
+• Identifiant demandé à la page d'accueil plutôt qu'à la page d'évaluation.
+• Style des images associées aux questions défini dans le fichier "presentation.css".
+• Deux présentations retenues pour l'affichage du choix des thèmes dans la page d'accueil : cases à cocher et boutons radio.
+• Pour l'affichage des nombres de questions dans la page d'accueil, seule la présentation avec les boutons "radio" est retenue.
+
+Version 18 - Février 2012
+
+• Passage au HTML5.
+• Modification des pages "scores.html" et scores.php pour y intégrer les thèmes choisis.
+• Abandon des modes sauvegarde 1 et 2, la sauvegarde est toujours proposée, soit dans un cookie, soit sur un serveur.
+
+Version 19 - Janvier 2014
+
+• Abandon du système de frames pour passer d'une page à l'autre.
+• Sauvegarde automatique dans le mode d'évaluation sommative.
+• Ajout d'un message pour le cas où le JavaScript du navigateur est désactivé.
+• Possibilité d'envoyer un mél dans le cas d'une évaluation sommative avec sauvegarde sur serveur.
+
+Version 20 - Juillet 2015
+
+• Dessin "fleche.gif" remplacé par "fleche.svg".
+• Classement par ordre décroisssant des notes dans l'affichage des résulats.
+• Mise en place de la fonction "audio()" permettant d'associer un fichier audio à une question.
+• Suppression de la possibilité de définir les dimensions des images.
+• Fonction "schema()" remplacée par la fonction "image()".
+• Fichier "presentation.css" renommé en "style.css".
+• Possibilité de commencer l'exercice en appuyant sur la touche ENTREE du clavier.
+• Fonctions "message_debut()" et "message_fin()" supprimées.
+• Affichage du bouton QUITTER supprimé lorsqu'aucune redirection n'est définie.
+• Affichage du bouton ARRETER supprimé dans le mode d'évaluation sommative.
+• Ajout de balises propres à Dyris permettant d'écrire des fractions dans le questionnaire.
+• Balise <div class="titre_cadre"> remplacée par <h2>, balise <div class="contenu_cadre"> supprimée.
+• Boutons des choix de thèmes ou du nombre de questions restant cochés lorsqu'on refait l'exercice.
+• Gestion du cas où le fichier "scores.txt" comporte une erreur.
+• Modernisation du code :
+ - Utilisation de la fonction "setInterval()" pour montrer les réponses justes.
+ - Suppression des fonctions "document.write()".
+
+Version 21 - Août 2018
+
+• Mise en place des réponses de type "listes de sélection".
+• Fonction "bouton_indice()" renommée "aide()" et pouvant éventuellement pendre un seul paramètre.
+• Abandon de la fonction "bouton_correction()", affichant un commentaire pour une question corrigée.
+• Possibilité de placer plusieurs types de réponses pour une même question.
+• Possibilité d'insérer du texte entre deux réponses.
+• Historique des versions mis à part dans le fichier "historique.txt".
+
+Version 22 - Juin 2020
+
+• Possibilité de définir des identifiants et des mots de passe pour gérer l'accès à l'évaluation.
+• Fichier "scores.txt" renommé "scores.csv".
+• Remplacement du dessin chargt.gif par une animation en CSS.
+• Sélection des cases à cocher ou des boutons radios possible en cliquant sur le libellé de l'élément.
+• Dessin "fleche.svg" intégré à la feuille de style "math.css".
+• Suppression du bouton "EFFACER LES SCORES" dans la page "scores.php".
+• Confirmation des enregistrements des scores par une boîte de dialogue plutôt qu'une page HTML.
+• Requête de type AJAX pour l'enregistrement des scores sur le serveur.
+• Remplacement des fenêtres secondaires par des iframes (contenus intégrés).
+• Suppression du bouton "QUITTER" des pages "scores.html" et "scores.php".
+• Méthode GET substituée par la méthode POST pour enregistrer les scores sur le serveur.
+
+Version 23 - Mai 2022
+
+• Possibilité de limiter le temps pour répondre aux questions.
+• Remplacement de l'animation en HTML/CSS, anciennement le dessin chargt.gif, par le dessin chargt.svg.
+• Message indiquant que le JavaScript est désactivé placé dans une page à part.
+• Fenêtres auxiliaires avec l'assombrissement sur toute la page.
+• Classes .cadre et .menu remplacées par les balises structurantes <section> et <nav>.
+• Distinction entre les fenêtres d'information et celles de confirmation, dans le fichier textes.js.
+• Retrait du fichier historique.txt de l'archive.
+• Image à la place du X textuel, pour le bouton de fermeture des fenêtres auxiliaires.
+• Gestion uniformisée des boutons supplémentaires pour la page d'accueil et celles du questionnaire.
+
+Version 24 - Décembre 2023
+
+• Bouton supplémentaire défini dans le fichier « textes.js », pour passer à la page d'évaluation après la dernière question posée.
+• Intégration de la bibliothèque MinMathJS.
+• Amélioration de la gestion des codes d'accès.
+• Possibilité de redimensionner les images associées aux questions.
+• Fonctions « image() » et « audio() » réunies en une fonction « ajout() ».
+• Possibilité, avec la fonction « ajout() », d'inclure des vidéos, des fichiers au format PDF... 
+
+

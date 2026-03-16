@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+<h1 style="text-align: center;">LISTE DE CARACTERES UNICODE</h1>
+<p>Un simple copier-coller des caractères ci-dessous vous permettra
+de les insérer dans votre fichier texte enregistré au format UTF-8.</p>
+<script>
+debut=0;
+fin=11000;
+nb=45;
+for (var i=debut; i<fin; i++) {
+	document.write("&#"+i+";&nbsp;&nbsp;");
+	if (i>=nb && Math.round((i-debut)/nb)==(i-debut)/nb) document.write("<br>");
+}
+</script>
+</body>
+
+</html>
+
